@@ -27,6 +27,9 @@ import bottle
 def swagger():
     return {}
 
+@bottle.route('/<filename>.<ext>')
+def static_stuff(filename, ext):
+    return bottle.static_file("%s.%s" % (filename, ext), root='static')
 
 @bottle.get("/chaos")
 def _():

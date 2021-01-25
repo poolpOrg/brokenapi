@@ -35,7 +35,7 @@ paths:
           minimum: 1
           description: CPU cost of the call in number of operations
         - in: query
-          name: cpu_cost_variation
+          name: cpu_cost_delta
           required: false
           type: integer
           minimum: 1
@@ -47,7 +47,7 @@ paths:
           minimum: 1
           description: Memory cost of the call in bytes
         - in: query
-          name: mem_cost_variation
+          name: mem_cost_delta
           required: false
           type: integer
           minimum: 1
@@ -59,7 +59,7 @@ paths:
           minimum: 1
           description: Time cost of the call in seconds
         - in: query
-          name: time_cost_variation
+          name: time_cost_delta
           required: false
           type: float
           minimum: 1
@@ -71,7 +71,7 @@ paths:
           minimum: 1
           description: Disk read cost of the call in bytes
         - in: query
-          name: disk_read_cost_variation
+          name: disk_read_cost_delta
           required: false
           type: integer
           minimum: 1
@@ -83,7 +83,7 @@ paths:
           minimum: 1
           description: Disk write cost of the call in bytes
         - in: query
-          name: disk_write_cost_variation
+          name: disk_write_cost_delta
           required: false
           type: integer
           minimum: 1
@@ -95,7 +95,7 @@ paths:
           minimum: 1
           description: IO read cost of the call in bytes
         - in: query
-          name: io_read_cost_variation
+          name: io_read_cost_delta
           required: false
           type: integer
           minimum: 1
@@ -107,7 +107,7 @@ paths:
           minimum: 1
           description: IO write cost of the call in bytes
         - in: query
-          name: io_write_cost_variation
+          name: io_write_cost_delta
           required: false
           type: integer
           minimum: 1
