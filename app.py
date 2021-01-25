@@ -23,6 +23,11 @@ import time
 import bottle
 
 
+@bottle.route("/", template="index.html")
+def swagger():
+    return {}
+
+
 @bottle.get("/chaos")
 def _():
     try:
