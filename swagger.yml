@@ -40,7 +40,6 @@ paths:
           type: integer
           minimum: 1
           description: CPU cost variation of the call in number of operations
-
         - in: query
           name: mem_cost
           required: false
@@ -65,7 +64,54 @@ paths:
           type: float
           minimum: 1
           description: Time cost variation of the call in seconds
-
+        - in: query
+          name: disk_read_cost
+          required: false
+          type: integer
+          minimum: 1
+          description: Disk read cost of the call in bytes
+        - in: query
+          name: disk_read_cost_variation
+          required: false
+          type: integer
+          minimum: 1
+          description: Disk read cost variation of the call in bytes
+        - in: query
+          name: disk_write_cost
+          required: false
+          type: integer
+          minimum: 1
+          description: Disk write cost of the call in bytes
+        - in: query
+          name: disk_write_cost_variation
+          required: false
+          type: integer
+          minimum: 1
+          description: Disk write cost variation of the call in bytes
+        - in: query
+          name: io_read_cost
+          required: false
+          type: integer
+          minimum: 1
+          description: IO read cost of the call in bytes
+        - in: query
+          name: io_read_cost_variation
+          required: false
+          type: integer
+          minimum: 1
+          description: IO read cost variation of the call in bytes
+        - in: query
+          name: io_write_cost
+          required: false
+          type: integer
+          minimum: 1
+          description: IO write cost of the call in bytes
+        - in: query
+          name: io_write_cost_variation
+          required: false
+          type: integer
+          minimum: 1
+          description: IO write cost variation of the call in bytes
       responses:
         200:
           description: OK

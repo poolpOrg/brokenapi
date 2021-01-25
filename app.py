@@ -17,6 +17,7 @@
 import hashlib
 import random
 import string
+import tempfile
 import time
 
 import bottle
@@ -49,6 +50,28 @@ def _():
         failure_code = int(failure_code)
         failure_rate = bottle.request.GET.get('failure_rate', '0')
         failure_rate = int(failure_rate)
+
+        disk_read_cost = bottle.request.GET.get('disk_read_cost', '0')
+        disk_read_cost = int(disk_read_cost)
+        disk_read_cost_variation = bottle.request.GET.get('disk_read_cost_variation', '0')
+        disk_read_cost_variation = int(disk_read_cost_variation)
+
+        disk_write_cost = bottle.request.GET.get('disk_write_cost', '0')
+        disk_write_cost = int(disk_write_cost)
+        disk_write_cost_variation = bottle.request.GET.get('disk_write_cost_variation', '0')
+        disk_write_cost_variation = int(disk_write_cost_variation)
+
+        io_read_cost = bottle.request.GET.get('io_read_cost', '0')
+        io_read_cost = int(io_read_cost)
+        io_read_cost_variation = bottle.request.GET.get('io_read_cost_variation', '0')
+        io_read_cost_variation = int(io_read_cost_variation)
+
+        io_write_cost = bottle.request.GET.get('io_write_cost', '0')
+        io_write_cost = int(io_write_cost)
+        io_write_cost_variation = bottle.request.GET.get('io_write_cost_variation', '0')
+        io_write_cost_variation = int(io_write_cost_variation)
+
+
     except:
         raise bottle.HTTPError(400)
 
@@ -62,6 +85,50 @@ def _():
     if mem_cost:
         retbuf = [random.choice(string.ascii_letters) \
                     for _ in range(0, mem_cost + random.randint(0, mem_cost_variation))]
+
+
+    if disk_read_cost:
+        disk_read_cost_real = disk_read_cost + random.randint(0, disk_read_cost_variation)
+        total = 0
+        while total < disk_read_cost_real:
+            with open("/etc/passwd", "r") as ifp:
+                buf = ifp.read(disk_read_cost_real)
+                if buf:
+                    total += len(buf)
+
+    if io_read_cost:
+        io_read_cost_real = io_read_cost + random.randint(0, io_read_cost_variation)
+        total = 0
+        while total < io_read_cost_real:
+            with open("/dev/zero", "r") as ifp:
+                buf = ifp.read(io_read_cost_real)
+                if buf:
+                    total += len(buf)
+
+    if disk_write_cost:
+        disk_write_cost_real = disk_write_cost + random.randint(0, disk_write_cost_variation)
+        total = 0
+        with tempfile.TemporaryFile() as ofp:
+            while total < disk_write_cost_real:
+                nbytes = 0
+                if disk_write_cost_real - total > 16384:
+                    nbytes = 16384
+                else:
+                    nbytes = disk_write_cost_real - total
+                total += ofp.write(b"a"*nbytes)
+
+    if io_write_cost:
+        io_write_cost_real = io_write_cost + random.randint(0, io_write_cost_variation)
+        total = 0
+        with open("/dev/null", "wb") as ofp:
+            while total < io_write_cost_real:
+                nbytes = 0
+                if io_write_cost_real - total > 16384:
+                    nbytes = 16384
+                else:
+                    nbytes = io_write_cost_real - total
+                total += ofp.write(b"a"*nbytes)
+
 
     if failure_rate:
         rnd = random.random() * 100
