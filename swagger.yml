@@ -1,0 +1,71 @@
+swagger: "2.0"
+info:
+  title: Chaos API
+  description: description for the Chaos API.
+  version: 1.0.0
+host: 127.0.0.1:8080
+basePath: /
+schemes:
+  - http
+paths:
+  /chaos:
+    get:
+      summary: bleh
+      description: Optional extended description in Markdown.
+      produces:
+        - text/plain
+      parameters:
+        - in: query
+          name: failure_code
+          required: false
+          type: integer
+          minimum: 1
+          description: status code to generate upon failure
+        - in: query
+          name: failure_rate
+          required: false
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: failure rate in percentage of queries
+        - in: query
+          name: cpu_cost
+          required: false
+          type: integer
+          minimum: 1
+          description: CPU cost of the call in number of operations
+        - in: query
+          name: cpu_cost_variation
+          required: false
+          type: integer
+          minimum: 1
+          description: CPU cost variation of the call in number of operations
+
+        - in: query
+          name: mem_cost
+          required: false
+          type: integer
+          minimum: 1
+          description: Memory cost of the call in bytes
+        - in: query
+          name: mem_cost_variation
+          required: false
+          type: integer
+          minimum: 1
+          description: Memory cost variation of the call in bytes
+        - in: query
+          name: time_cost
+          required: false
+          type: float
+          minimum: 1
+          description: Time cost of the call in seconds
+        - in: query
+          name: time_cost_variation
+          required: false
+          type: float
+          minimum: 1
+          description: Time cost variation of the call in seconds
+
+      responses:
+        200:
+          description: OK
